@@ -22,8 +22,12 @@ async function main() {
   }
 }
 
-app.get('/dog', (req, res) => {
-  res.send('WOOF!!!')
+main() // Establish connection with MongoDB Atlas
+
+app.get('/products', async (req, res) => {
+  const product = await Product.find({});
+  console.log(product);
+  res.send('ALL PRODUCTS WILL BE HERE!');
 })
 
 app.listen(port, () => {
