@@ -25,10 +25,9 @@ async function main() {
 main() // Establish connection with MongoDB Atlas
 
 app.get('/products', async (req, res) => {
-  const product = await Product.find({});
-  console.log(product);
-  res.send('ALL PRODUCTS WILL BE HERE!');
-})
+  const products = await Product.find({});
+  res.render('products/index', { products });
+});
 
 app.listen(port, () => {
   console.log(`APP IS LISTENING ON PORT ${port}`);
