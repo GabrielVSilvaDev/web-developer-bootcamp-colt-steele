@@ -13,19 +13,61 @@ async function main() {
   }
 }
 
-const p = new Product({
-    name: 'Ruby Grapefruit', 
-    price: 1.99,
-    category: 'fruit'
-})
+// const p = new Product({
+//     name: 'Ruby Grapefruit', 
+//     price: 1.99,
+//     category: 'fruit'
+// })
 
-async function saveProduct() {
-    try {
-        const saved = await p.save();
-        console.log(saved);
-    } catch (e) {
-        console.log(e);
-    }
+// async function saveProduct() {
+//     try {
+//         const saved = await p.save();
+//         console.log(saved);
+//     } catch (e) {
+//         console.log(e);
+//     }
+// }
+
+// main().then(() => saveProduct());
+
+const seedProducts = [
+  {
+    name: 'Fairy Eggplant',
+    price: 1.00,
+    category: 'vegetable'
+  },
+  {
+    name: 'Organic Goddess Melon',
+    price: 4.99,
+    category: 'fruit'
+  },
+  {
+    name: 'Organic Mini Seedless Watermelon',
+    price: 3.99,
+    category: 'fruit'
+  },
+  {
+    name: 'Organic Celery',
+    price: 1.50,
+    category: 'vegetable'
+  },
+  {
+    name: 'Chocolate Whe Milk',
+    price: 2.69,
+    category: 'dairy'
+  },
+];
+
+async function insertSeedProducts() {
+  try {
+    const res = await Product.insertMany(seedProducts);
+    console.log('Seeded products:', res);
+  } catch (e) {
+    console.log('Error inserting seed products:', e);
+  } finally {
+    mongoose.connection.close();
+    console.log('Connection closed.');
+  }
 }
 
-main().then(() => saveProduct());
+main().then(() => insertSeedProducts());
