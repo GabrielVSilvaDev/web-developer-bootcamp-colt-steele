@@ -13,3 +13,20 @@ async function main() {
   }
 }
 
+const p = new Product({
+    name: 'Ruby Grapefruit', 
+    price: 1.99,
+    category: 'fruit'
+})
+
+async function saveProduct() {
+    try {
+        const saved = await p.save();
+        console.log(saved);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+saveProduct();
+
