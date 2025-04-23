@@ -28,5 +28,4 @@ async function saveProduct() {
     }
 }
 
-saveProduct();
-
+main().then(() => saveProduct());
