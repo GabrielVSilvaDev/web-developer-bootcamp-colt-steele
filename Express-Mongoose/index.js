@@ -4,6 +4,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const Product = require('./models/product');
 
 const port = process.env.PORT || 3000;
 
