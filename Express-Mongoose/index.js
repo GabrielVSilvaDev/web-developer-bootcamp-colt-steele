@@ -10,6 +10,7 @@ const port = process.env.PORT || 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({extended: true}))
 
 async function main() {
   try {
@@ -33,11 +34,17 @@ app.get('/products/new', (req, res) => {
   res.render('products/new');
 });
 
-app.get('/products/:id', async (req, res) => {
+app.post("/products", async (req, res) => {
+  const newProduct = new Product(req.body);
+  await newProduct.save();
+  res.redirect(`/products/${newProduct._id}`);
+});
+
+app.get("/products/:id", async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id);
-  res.render('products/show', { product })
-})
+  res.render("products/show", { product });
+});
 
 app.listen(port, () => {
   console.log(`APP IS LISTENING ON PORT ${port}`);
