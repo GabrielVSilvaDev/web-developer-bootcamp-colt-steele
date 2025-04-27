@@ -55,6 +55,13 @@ app.get('/products/:id/edit', async (req, res) => {
   res.render('products/edit', { product });
 });
 
+app.put('/products/:id', async (req, res) => {
+  const { id } = req.params;
+  // Ensures schema validations are applied during update
+  const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
+  res.redirect(`/product/${product._id}`);
+});
+
 app.listen(port, () => {
   console.log(`APP IS LISTENING ON PORT ${port}`);
 });
