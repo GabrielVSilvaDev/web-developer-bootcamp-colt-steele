@@ -59,7 +59,7 @@ app.put('/products/:id', async (req, res) => {
   const { id } = req.params;
   // Ensures schema validations are applied during update
   const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
-  res.redirect(`/product/${product._id}`);
+  res.redirect(`/products/${product._id}`);
 });
 
 app.listen(port, () => {
